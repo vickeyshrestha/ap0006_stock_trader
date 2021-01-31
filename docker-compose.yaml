@@ -1,0 +1,48 @@
+version: "1"
+
+services:
+
+  maxzilla-messagebus:
+    container_name: maxzilla-messagebus
+    networks:
+      - maxzilla
+    restart: always
+    image: hub.docker.com/service-maxzilla-messagebus:0.0.1
+    ports:
+      - 5001: 8085
+
+  maxzilla-sql:
+    container_name: maxzilla-sql
+    networks:
+      - maxzilla
+    restarts: always
+    image: hub.docker.com/service-maxzilla-sql:0.0.1
+    ports:
+      - 5002: 8085
+
+  maxzilla-stock-trader:
+    container_name: maxzilla-stock-trader
+    networks:
+      - maxzilla
+    restarts: always
+    image: hub.docker.com/maxzilla-stock-trader:0.0.1
+    ports:
+      - 5002: 8085
+    depends_on:
+      - maxzilla-messagebus
+      - maxzilla-sql
+    environment:
+      env: dev
+      config_file: config
+
+# Add any volumes here if required
+volumes:
+  maxzilla-sql:
+
+networks:
+  maxzilla:
+    driver: "bridge"
+    ipam:
+      driver: default
+      config:
+        - subnet: 255.255.255.0
