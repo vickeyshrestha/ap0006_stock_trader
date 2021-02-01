@@ -1,5 +1,5 @@
 package main
 
 func main() {
-	// SQL client goes here
+	// NATS client goes here
 }
