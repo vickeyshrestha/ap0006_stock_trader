@@ -1,6 +1,6 @@
 **Maxzilla**
 
-Maxzilla is a platform that structures an application as a collection of services that are highly maintainable, loosely coupled, independently deployable and organized around business capabilities.
+Maxzilla is a microservice platform that structures an application as a collection of services that are highly maintainable, loosely coupled, independently deployable and organized around business capabilities.
 
 
 **prerequisite**
