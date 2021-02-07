@@ -1,5 +1,7 @@
 package stocktrader
 
+import "context"
+
 type postgresClient struct {
 }
 
