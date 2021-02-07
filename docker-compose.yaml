@@ -7,9 +7,9 @@ services:
     networks:
       - maxzilla
     restart: always
-    image: hub.docker.com/service-maxzilla-messagebus:0.0.1
+    image: hub.docker.com/nats:latest
     ports:
-      - 5001: 8085
+      - 5001: 4222
 
   maxzilla-sql:
     container_name: maxzilla-sql
