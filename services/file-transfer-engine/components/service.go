@@ -1,4 +1,4 @@
-package bigfile
+package filetransferengine
 
 import (
 	"encoding/json"

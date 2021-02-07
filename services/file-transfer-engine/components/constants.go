@@ -1,4 +1,4 @@
-package bigfile
+package filetransferengine
 
 const (
 	DbName     = "ap0005_file_transfer" // Name of mySql Database
