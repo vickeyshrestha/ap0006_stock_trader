@@ -2,7 +2,7 @@ package stocktrader
 
 import (
 	"context"
-	pb "github.com/vickeyshrestha/sharing-services/protobuf/stock_trader"
+	"github.com/vickeyshrestha/sharing-services/drivers/sql"
 )
 
 type RepositoryClient interface {
@@ -10,6 +10,9 @@ type RepositoryClient interface {
 }
 
 func NewRepositoryClient(databaseUserName, databasePassword, databaseName string) (RepositoryClient, error) {
-
-	return &postgresClient{}, nil
+	pstgrsDriver, err := sql.NewPostgresDbConnection(ApplicationConfiguration.DatabaseHost, databaseUserName, databasePassword, databaseName, ApplicationConfiguration.databasePort)
+	if err != nil {
+		return nil, err
+	}
+	return &postgresClient{postgresDriver: pstgrsDriver}, nil
 }
