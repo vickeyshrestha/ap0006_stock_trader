@@ -14,5 +14,6 @@ Maxzilla is a microservice platform that structures an application as a collecti
 <br>- requires mongo database db setup
 
 **docker compose**
+- run docker-compose on one of the available servers to bring all of the image's instaces up and running
 <br> c:/> docker-compose up -d (To bring up all docker instances)
 <br> c:/> docker-compose down -d (To bring down all docker instances)
