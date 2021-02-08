@@ -6,17 +6,17 @@ import (
 	"gopkg.in/mgo.v2/bson"
 	"io/ioutil"
 	"log"
-	"maxzilla/services/mongo-engine"
+	engine "maxzilla/services/mongo-engine"
 	"net/http"
 	"strconv"
 )
 
 type Server struct {
 	session *mgo.Session
-	config  ap0001_mongo_engine.InitialConfig
+	config  engine.InitialConfig
 }
 
-func NewServer(config ap0001_mongo_engine.InitialConfig) (ap0001_mongo_engine.MongoAdapter, error) {
+func NewServer(config engine.InitialConfig) (engine.MongoAdapter, error) {
 	var mongoDbURL = *config.GetMongoHostAndPort()
 	session, err := mgo.Dial(mongoDbURL)
 	if err != nil {
