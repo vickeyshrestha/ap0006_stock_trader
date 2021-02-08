@@ -9,7 +9,9 @@ services:
     restart: always
     image: hub.docker.com/nats:latest
     ports:
-      - 5001: 4222
+      - 5101: 4222
+      - 5102: 6222
+      - 5103: 8222
 
   maxzilla-sql:
     container_name: maxzilla-sql
