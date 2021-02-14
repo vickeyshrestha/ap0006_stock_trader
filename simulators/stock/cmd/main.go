@@ -20,12 +20,29 @@ func main() {
 	defer encodedNatsConnection.Close()
 
 	personChanSend := make(chan *stocks.TimeSeries)
-	encodedNatsConnection.BindSendChan("request_subject", personChanSend)
+	encodedNatsConnection.BindSendChan(stocks.SimNatsTopic, personChanSend)
 
 	i := 0
 	for {
 
-		s := stocks.Stock{
+		sNasdaq := stocks.Stock{
+			CompanyA: rand.Float64(),
+			CompanyB: rand.Float64(),
+			CompanyC: rand.Float64(),
+			CompanyD: rand.Float64(),
+			CompanyE: rand.Float64(),
+			CompanyF: rand.Float64(),
+		}
+		sNYSE := stocks.Stock{
+			CompanyA: rand.Float64(),
+			CompanyB: rand.Float64(),
+			CompanyC: rand.Float64(),
+			CompanyD: rand.Float64(),
+			CompanyE: rand.Float64(),
+			CompanyF: rand.Float64(),
+		}
+
+		sLondonSE := stocks.Stock{
 			CompanyA: rand.Float64(),
 			CompanyB: rand.Float64(),
 			CompanyC: rand.Float64(),
@@ -36,15 +53,27 @@ func main() {
 
 		// Create instance of type Request with Id set to
 		// the current value of i
-		req := stocks.TimeSeries{
+		reqNASDAQ := stocks.TimeSeries{
 			ExchangeName: "NASDAQ Stock Exchange",
-			Stocks:       s,
+			Stocks:       sNasdaq,
+		}
+		reqNYSE := stocks.TimeSeries{
+			ExchangeName: "NY Stock Exchange",
+			Stocks:       sNYSE,
+		}
+		reqLonSE := stocks.TimeSeries{
+			ExchangeName: "London Stock Exchange",
+			Stocks:       sLondonSE,
 		}
 
 		// Just send to the channel! :)
-		log.Printf("Sending request %s", req)
+		log.Printf("Sending request %s, data: %v", reqNASDAQ.ExchangeName, reqNASDAQ.Stocks)
+		log.Printf("Sending request %s, data: %v", reqNYSE.ExchangeName, reqNYSE.Stocks)
+		log.Printf("Sending request %s, data: %v", reqLonSE.ExchangeName, reqLonSE.Stocks)
 
-		personChanSend <- &req
+		personChanSend <- &reqNASDAQ
+		personChanSend <- &reqNYSE
+		personChanSend <- &reqLonSE
 
 		// Pause and increment counter
 		time.Sleep(time.Second * 1)
