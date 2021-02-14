@@ -2,7 +2,7 @@ package healthCheck
 
 import (
 	"encoding/json"
-	engine "maxzilla/services/mongo-engine"
+	engine "godzilla/services/mongo-engine"
 	"net/http"
 	"time"
 )

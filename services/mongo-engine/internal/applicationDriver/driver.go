@@ -3,11 +3,11 @@ package applicationDriver
 import (
 	"fmt"
 	"github.com/gorilla/mux"
+	engine "godzilla/services/mongo-engine"
+	"godzilla/services/mongo-engine/internal/generalUtilities"
+	"godzilla/services/mongo-engine/internal/healthCheck"
+	"godzilla/services/mongo-engine/internal/mongoAdapter"
 	"log"
-	engine "maxzilla/services/mongo-engine"
-	"maxzilla/services/mongo-engine/internal/generalUtilities"
-	"maxzilla/services/mongo-engine/internal/healthCheck"
-	"maxzilla/services/mongo-engine/internal/mongoAdapter"
 	"os"
 	"strings"
 )

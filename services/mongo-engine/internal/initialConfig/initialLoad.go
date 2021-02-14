@@ -3,8 +3,8 @@ package initialConfig
 import (
 	"encoding/json"
 	"flag"
+	"godzilla/services/mongo-engine"
 	"log"
-	"maxzilla/services/mongo-engine"
 	"os"
 	"time"
 )

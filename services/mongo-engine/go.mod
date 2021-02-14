@@ -1,4 +1,4 @@
-module maxzilla/services/mongo-engine
+module godzilla/services/mongo-engine
 
 go 1.15
 

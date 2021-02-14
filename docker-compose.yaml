@@ -2,10 +2,10 @@ version: "1"
 
 services:
 
-  maxzilla-messagebus:
-    container_name: maxzilla-messagebus
+  godzilla-messagebus:
+    container_name: godzilla-messagebus
     networks:
-      - maxzilla
+      - godzilla
     restart: always
     image: hub.docker.com/nats:latest
     ports:
@@ -13,50 +13,50 @@ services:
       - 5102: 6222
       - 5103: 8222
 
-  maxzilla-sql:
-    container_name: maxzilla-sql
+  godzilla-sql:
+    container_name: godzilla-sql
     networks:
-      - maxzilla
+      - godzilla
     restarts: always
-    image: hub.docker.com/service-maxzilla-sql:0.0.1
+    image: hub.docker.com/service-godzilla-sql:0.0.1
     ports:
       - 5002: 8085
 
-  maxzilla-stock-trader:
-    container_name: maxzilla-stock-trader
+  godzilla-stock-trader:
+    container_name: godzilla-stock-trader
     networks:
-      - maxzilla
+      - godzilla
     restarts: always
-    image: hub.docker.com/maxzilla-stock-trader:0.0.1
+    image: hub.docker.com/godzilla-stock-trader:0.0.1
     ports:
       - 5002: 8085
     depends_on:
-      - maxzilla-messagebus
-      - maxzilla-sql
+      - godzilla-messagebus
+      - godzilla-sql
     environment:
       env: dev
       config_file: config
 
-  maxzilla-big-file:
-    container_name: maxzilla-big-file
+  godzilla-big-file:
+    container_name: godzilla-big-file
     networks:
-      - maxzilla
+      - godzilla
     restarts: always
-    image: hub.docker.com/maxzilla-big-file:0.0.1
+    image: hub.docker.com/godzilla-big-file:0.0.1
     ports:
       - 5002: 8085
     depends_on:
-      - maxzilla-sql
+      - godzilla-sql
     environment:
       env: dev
       config_file: config
 
 # Add any volumes here if required
 volumes:
-  maxzilla-sql:
+  godzilla-sql:
 
 networks:
-  maxzilla:
+  godzilla:
     driver: "bridge"
     ipam:
       driver: default

@@ -1,4 +1,4 @@
-module maxzilla/services/filetransferengine
+module godzilla/services/file-transfer-engine
 
 go 1.15
 

@@ -1,7 +1,7 @@
 package main
 
 import (
-	component "maxzilla/services/filetransferengine/components"
+	component "godzilla/services/file-transfer-engine/components"
 	"net/http"
 )
 

@@ -1,4 +1,4 @@
-module github/maxzilla/services/stock-trader
+module github/godzilla/services/stock-trader
 
 go 1.15
 

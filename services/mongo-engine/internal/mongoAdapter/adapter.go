@@ -2,11 +2,11 @@ package mongoAdapter
 
 import (
 	"encoding/json"
+	engine "godzilla/services/mongo-engine"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 	"io/ioutil"
 	"log"
-	engine "maxzilla/services/mongo-engine"
 	"net/http"
 	"strconv"
 )
