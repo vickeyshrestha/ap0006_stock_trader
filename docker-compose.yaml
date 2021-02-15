@@ -13,12 +13,23 @@ services:
       - 5102: 6222
       - 5103: 8222
 
+  godzilla-simulator-stock:
+    container_name: godzilla-simulator-stock
+    networks:
+      - godzilla
+    restart: always
+    image: docker.io/vickeyshrestha/simulator-stock:0.0.1
+    ports:
+      - 5101: 4222
+      - 5102: 6222
+      - 5103: 8222
+
   godzilla-sql:
     container_name: godzilla-sql
     networks:
       - godzilla
     restarts: always
-    image: hub.docker.com/service-godzilla-sql:0.0.1
+    image: docker.io/vickeyshrestha/service-godzilla-sql:0.0.1
     ports:
       - 5002: 8085
 
@@ -27,7 +38,7 @@ services:
     networks:
       - godzilla
     restarts: always
-    image: hub.docker.com/godzilla-stock-trader:0.0.1
+    image: docker.io/vickeyshrestha/godzilla-stock-trader:0.0.1
     ports:
       - 5002: 8085
     depends_on:
@@ -42,7 +53,7 @@ services:
     networks:
       - godzilla
     restarts: always
-    image: hub.docker.com/godzilla-big-file:0.0.1
+    image: docker.io/vickeyshrestha/godzilla-big-file:0.0.1
     ports:
       - 5002: 8085
     depends_on:
