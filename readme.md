@@ -14,6 +14,8 @@ Godzilla is a microservice platform that structures an application as a collecti
 <br>- requires mongo database db setup
 
 **docker compose**
-- run docker-compose on one of the available servers to bring all of the image's instaces up and running
-<br> c:/> docker-compose up -d (To bring up all docker instances)
-<br> c:/> docker-compose down -d (To bring down all docker instances)
+- docker-compose.yaml is not use for the internal godzilla repo but is for usage on the VM where all docker services will be running.
+- setup docker-compose command on your linux VM using **sudo apt  install docker-compose**
+- run docker-compose.yaml on one of the available servers to bring all of the image's instaces up and running
+<br> _c:/> docker-compose -f docker-compose.yaml up -d_ (To bring up all docker instances)
+<br> _c:/> docker-compose -f docker-compose.yaml down_ (To bring down all docker instances)
