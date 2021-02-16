@@ -2,7 +2,7 @@ package stocktrader
 
 import (
 	"context"
-	sql "github.com/vickeyshrestha/sharing-services/drivers/sql"
+	sql "github.com/vickeyshrestha/sharing-services/drivers/postgres"
 )
 
 type postgresClient struct {

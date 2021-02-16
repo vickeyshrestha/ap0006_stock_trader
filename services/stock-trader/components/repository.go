@@ -2,7 +2,7 @@ package stocktrader
 
 import (
 	"context"
-	"github.com/vickeyshrestha/sharing-services/drivers/sql"
+	sql "github.com/vickeyshrestha/sharing-services/drivers/postgres"
 )
 
 type RepositoryClient interface {
@@ -10,6 +10,7 @@ type RepositoryClient interface {
 }
 
 func NewRepositoryClient(databaseUserName, databasePassword, databaseName string) (RepositoryClient, error) {
+
 	pstgrsDriver, err := sql.NewPostgresDbConnection(ApplicationConfiguration.DatabaseHost, databaseUserName, databasePassword, databaseName, ApplicationConfiguration.databasePort)
 	if err != nil {
 		return nil, err
