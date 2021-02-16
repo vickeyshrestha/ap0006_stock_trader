@@ -20,9 +20,9 @@ services:
     restart: always
     image: docker.io/vickeyshrestha/simulator-stock:0.0.1
     ports:
-      - 5101: 4222
-      - 5102: 6222
-      - 5103: 8222
+      - 5104: 8085
+    environment:
+      natsUrl: 192.168.202.128:4222
 
   godzilla-sql:
     container_name: godzilla-sql
@@ -31,7 +31,7 @@ services:
     restarts: always
     image: docker.io/vickeyshrestha/service-godzilla-sql:0.0.1
     ports:
-      - 5002: 8085
+      - 5005: 8085
 
   godzilla-stock-trader:
     container_name: godzilla-stock-trader
@@ -40,7 +40,7 @@ services:
     restarts: always
     image: docker.io/vickeyshrestha/godzilla-stock-trader:0.0.1
     ports:
-      - 5002: 8085
+      - 5006: 8085
     depends_on:
       - godzilla-messagebus
       - godzilla-sql
@@ -55,7 +55,7 @@ services:
     restarts: always
     image: docker.io/vickeyshrestha/godzilla-big-file:0.0.1
     ports:
-      - 5002: 8085
+      - 5007: 8085
     depends_on:
       - godzilla-sql
     environment:
