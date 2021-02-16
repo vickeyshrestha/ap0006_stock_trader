@@ -7,7 +7,7 @@ import (
 )
 
 type service struct {
-	// TODO: service components goes here
+	repositoryClient RepositoryClient
 }
 
 func (s service) GetStatus(ctx context.Context, empty *emptypb.Empty) (*pb.Status, error) {
@@ -18,7 +18,7 @@ func (s service) GetActions(ctx context.Context, empty *emptypb.Empty) (*pb.Acti
 	panic("implement me")
 }
 
-func NewStockTraderService() pb.StockTraderServer {
-	s := service{}
+func NewStockTraderService(repoClt RepositoryClient) pb.StockTraderServer {
+	s := service{repositoryClient: repoClt}
 	return &s
 }
