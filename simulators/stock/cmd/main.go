@@ -11,7 +11,14 @@ import (
 )
 
 func main() {
-	natsUrl := os.Getenv("natsUrl")
+	natsHost := os.Getenv("natsHost")
+	natsPort := os.Getenv("natsPort")
+	if natsHost == "" || natsPort == "" {
+		fmt.Println(stocks.ErrNatsHostPortRequired)
+		return
+	}
+	natsUrl := fmt.Sprintf("%s:%s", natsHost, natsPort)
+	fmt.Println(fmt.Sprintf(stocks.InfoNatsConnection, natsUrl))
 	encodedNatsConnection, err := nats.NewNatsConnectionClient(natsUrl)
 	if err != nil {
 		fmt.Println(fmt.Sprintf(stocks.ErrFailedToInitializeNatsClient, err))

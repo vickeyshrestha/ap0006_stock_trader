@@ -1,4 +1,4 @@
-version: "1.0.0"
+version: "2"
 
 services:
 
@@ -7,60 +7,63 @@ services:
     networks:
       - godzilla
     restart: always
-    image: hub.docker.com/nats:latest
+    image: docker.io/nats:latest
     ports:
-      - 5101: 4222
-      - 5102: 6222
-      - 5103: 8222
+      - 5101:4222
+      - 5102:6222
+      - 5103:8222
 
   godzilla-simulator-stock:
     container_name: godzilla-simulator-stock
     networks:
       - godzilla
     restart: always
-    image: docker.io/vickeyshrestha/simulator-stock:0.0.1
+    image: docker.io/vickeyshrestha/simulator-stock:0.0.2
     ports:
-      - 5104: 8085
-    environment:
-      natsUrl: 192.168.202.128:4222
-
-  godzilla-sql:
-    container_name: godzilla-sql
-    networks:
-      - godzilla
-    restarts: always
-    image: docker.io/vickeyshrestha/service-godzilla-sql:0.0.1
-    ports:
-      - 5005: 8085
-
-  godzilla-stock-trader:
-    container_name: godzilla-stock-trader
-    networks:
-      - godzilla
-    restarts: always
-    image: docker.io/vickeyshrestha/godzilla-stock-trader:0.0.1
-    ports:
-      - 5006: 8085
+      - 5104:8085
     depends_on:
       - godzilla-messagebus
-      - godzilla-sql
     environment:
-      env: dev
-      config_file: config
+      natsHost: godzilla-messagebus
+      natsPort: 4222
 
-  godzilla-big-file:
-    container_name: godzilla-big-file
-    networks:
-      - godzilla
-    restarts: always
-    image: docker.io/vickeyshrestha/godzilla-big-file:0.0.1
-    ports:
-      - 5007: 8085
-    depends_on:
-      - godzilla-sql
-    environment:
-      env: dev
-      config_file: config
+ # godzilla-sql:
+ #   container_name: godzilla-sql
+ #   networks:
+ #     - godzilla
+ #   restart:always
+ #   image: docker.io/vickeyshrestha/service-godzilla-sql:0.0.1
+ #   ports:
+ #     - 5005:8085
+
+ # godzilla-stock-trader:
+ #   container_name: godzilla-stock-trader
+ #   networks:
+ #     - godzilla
+ #   restart:always
+ #   image: docker.io/vickeyshrestha/godzilla-stock-trader:0.0.1
+ #   ports:
+ #     - 5006:8085
+ #   depends_on:
+ #     - godzilla-messagebus
+ #     - godzilla-sql
+ #   environment:
+ #     env: dev
+ #     config_file: config
+
+ # godzilla-big-file:
+ #   container_name: godzilla-big-file
+ #   networks:
+ #     - godzilla
+ #   restarts: always
+ #   image: docker.io/vickeyshrestha/godzilla-big-file:0.0.1
+ #   ports:
+ #     - 5007: 8085
+ #   depends_on:
+ #     - godzilla-sql
+ #   environment:
+ #     env: dev
+ #     config_file: config
 
 # Add any volumes here if required
 volumes:
@@ -69,7 +72,7 @@ volumes:
 networks:
   godzilla:
     driver: "bridge"
-    ipam:
-      driver: default
-      config:
-        - subnet: 255.255.255.0
+    #ipam:
+     # driver: default
+      #config:
+       # - subnet: 10.75.0.0/23
