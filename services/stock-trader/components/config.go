@@ -1,12 +1,12 @@
 package stocktrader
 
-var ApplicationConfiguration configuration
+//var ApplicationConfiguration configuration
 
-type configuration struct {
+type Configuration struct {
 	GrpcPort     string
 	Httpport     string
 	ServiceName  string
 	DatabaseHost string
-	databasePort int
+	DatabasePort int
 	Environment  string
 }
