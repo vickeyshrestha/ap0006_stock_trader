@@ -1,0 +1,8 @@
+{
+  "GrpcPort": "8086",
+  "Httpport": "8085",
+  "ServiceName": "stock-trader",
+  "DatabaseHost": "localhost",
+  "DatabasePort": 5432,
+  "Environment": "dev"
+}
