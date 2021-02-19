@@ -5,10 +5,12 @@ Godzilla is a microservice platform that structures an application as a collecti
 
 **prerequisite software**
 1. Docker
-2. Nats (we can use a sample server as defined in docker-compose.yaml)
-3. Mongodb - to store some KV pairs
-4. Postgres db (for storing our big data)
-5. Dockerhub account to push images
+2. access to vickeyshrestha Dockerhub account to push images
+
+following dependencies should be taken care when docker-compose.yaml will run
+1. Nats (we can use a sample server as defined in docker-compose.yaml)
+2. Mongodb - to store some KV pairs
+3. Postgres db (for storing our big data)
 
 **docker compose**
 - docker-compose.yaml is not for the internal godzilla repo but is for usage on the VM where all docker services will be running.
