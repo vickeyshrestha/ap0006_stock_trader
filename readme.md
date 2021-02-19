@@ -18,3 +18,5 @@ following dependencies should be taken care when docker-compose.yaml will run
 - run docker-compose.yaml on one of the available servers to bring all of the image's instaces up and running
 <br> _c:/> docker-compose -f docker-compose.yaml up -d_ (To bring up all docker instances)
 <br> _c:/> docker-compose -f docker-compose.yaml down_ (To bring down all docker instances)
+  
+![img.png](img.png)
