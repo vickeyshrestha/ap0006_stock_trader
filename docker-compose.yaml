@@ -2,16 +2,36 @@ version: "2"
 
 services:
 
-  godzilla-messagebus:
-    container_name: godzilla-messagebus
+  godzilla-core-messagebus:
+    container_name: godzilla-core-messagebus
     networks:
       - godzilla
     restart: always
-    image: docker.io/nats:latest
+    image: docker.io/vickeyshrestha/nats:1.0.0
     ports:
       - 5101:4222
       - 5102:6222
       - 5103:8222
+
+  godzilla-core-postgres:
+    container_name: godzilla-core-postgres
+    networks:
+      - godzilla
+    restart: always
+    image: docker.io/vickeyshrestha/postgres:1.0.0
+    ports:
+      - 5104:5432
+    environment:
+      POSTGRES_PASSWORD: admin
+
+  godzilla-core-mongo:
+    container_name: godzilla-core-mongo
+    networks:
+      - godzilla
+    restart: always
+    image: docker.io/vickeyshrestha/mongo:1.0.0
+    ports:
+      - 5105:27017
 
   godzilla-simulator-stock:
     container_name: godzilla-simulator-stock
@@ -20,11 +40,11 @@ services:
     restart: always
     image: docker.io/vickeyshrestha/simulator-stock:0.0.2
     ports:
-      - 5104:8085
+      - 5111:8085
     depends_on:
-      - godzilla-messagebus
+      - godzilla-core-messagebus
     environment:
-      natsHost: godzilla-messagebus
+      natsHost: godzilla-core-messagebus
       natsPort: 4222
 
   godzilla-service-stock-trader:
@@ -34,10 +54,11 @@ services:
     restart: always
     image: docker.io/vickeyshrestha/service-stock-trader:0.0.1
     ports:
-      - 5105:8085
-      - 5106:8086
+      - 5112:8085
+      - 5113:8086
     depends_on:
-      - godzilla-messagebus
+      - godzilla-core-messagebus
+      - godzilla-core-postgres
     environment:
       dbUser: postgres
       dbPassword: admin
@@ -50,18 +71,11 @@ services:
     restart: always
     image: docker.io/vickeyshrestha/ap0001_mongo_engine:00.00.07
     ports:
-      - 5107:8085
+      - 5114:8085
+    depends_on:
+      - godzilla-core-mongo
     environment:
-      mongoHostAndPort: 192.168.202.108:27017
-
-  # godzilla-sql:
-  #   container_name: godzilla-sql
-  #   networks:
-  #     - godzilla
-  #   restart:always
-  #   image: docker.io/vickeyshrestha/service-godzilla-sql:0.0.1
-  #   ports:
-  #     - 5005:8085
+      mongoHostAndPort: godzilla-core-mongo:27017
 
   # godzilla-big-file:
   #   container_name: godzilla-big-file
