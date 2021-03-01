@@ -18,7 +18,7 @@ func main() {
 	databasePassword := os.Getenv("dbPassword")
 	databaseName := os.Getenv("dbName")
 	configFileFullPath := "config.json"
-	// configFileFullPath := "C:\Projects-Golang\src\godzilla\services\stock-trader\cmd\main.go" // while using windows for dev purpose only
+	//configFileFullPath := "C:\\Projects-Golang\\src\\godzilla\\services\\stock-trader\\resources\\config.json" // while using windows for dev purpose only
 	configuration, err := readConfigJson(configFileFullPath)
 	if err != nil {
 		fmt.Println(err)

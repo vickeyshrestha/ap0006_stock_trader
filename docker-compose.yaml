@@ -63,6 +63,8 @@ services:
       dbUser: postgres
       dbPassword: admin
       dbName: godzilla
+      dbHost: godzilla-core-postgres
+      dbPort: 5104
 
   godzilla-service-mongo-engine:
     container_name: godzilla-service-mongo-engine
