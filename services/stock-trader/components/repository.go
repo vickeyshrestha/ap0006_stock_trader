@@ -3,12 +3,13 @@ package stocktrader
 import (
 	"context"
 	sql "github.com/vickeyshrestha/sharing-services/drivers/postgres"
+	pb "github.com/vickeyshrestha/sharing-services/protobuf/stock_trader"
 	"os"
 	"strconv"
 )
 
 type RepositoryClient interface {
-	GetStatus(ctx context.Context)
+	GetStatus(ctx context.Context) (*pb.Status, error)
 }
 
 func NewRepositoryClient(databaseUserName, databasePassword, databaseName string, config Configuration) (RepositoryClient, error) {

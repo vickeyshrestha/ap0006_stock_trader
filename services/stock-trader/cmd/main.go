@@ -6,10 +6,17 @@ import (
 	"fmt"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	pb "github.com/vickeyshrestha/sharing-services/protobuf/stock_trader"
 	service "github/godzilla/services/stock-trader/components"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/health"
+	"google.golang.org/grpc/health/grpc_health_v1"
+	"net"
 	"net/http"
 	"os"
 	"time"
+
+	_ "github.com/jnewmano/grpc-json-proxy/codec"
 )
 
 func main() {
@@ -45,6 +52,7 @@ func main() {
 		}
 		index++
 	}
+	startGrpcServer(repository, configuration)
 	startService(repository, configuration, e)
 
 }
@@ -56,11 +64,28 @@ func startService(repository service.RepositoryClient, config service.Configurat
 	e.GET("/", hello)
 
 	// Start server
-	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", config.Httpport)))
+	e.Logger.Fatal(e.Start(fmt.Sprintf("%s", config.Httpport)))
 
 	// TODO: implement service here
 	ctx := context.Background()
 	s.GetStatus(ctx, nil)
+}
+
+func startGrpcServer(repository service.RepositoryClient, config service.Configuration) {
+	listener, err := net.Listen("tcp", config.GrpcPort)
+	if err != nil {
+		panic(err)
+	}
+	srv := service.NewStockTraderService(repository)
+	var server *grpc.Server
+	pb.RegisterStockTraderServer(server, srv)
+	healthServer := health.NewServer()
+	grpc_health_v1.RegisterHealthServer(server, healthServer)
+	go func() {
+		if err := server.Serve(listener); err != nil {
+			panic(err)
+		}
+	}()
 }
 
 // Handler
