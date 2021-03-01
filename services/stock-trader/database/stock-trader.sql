@@ -1,3 +1,6 @@
+-- Create schema if not exists --
+CREATE SCHEMA IF NOT EXISTS stocktrader;
+
 -- Creates table actions if doesn't exist
 CREATE TABLE IF NOT EXISTS stocktrader.actions (
     uid character varying NOT null,

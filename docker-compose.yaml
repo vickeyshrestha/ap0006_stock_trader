@@ -52,7 +52,7 @@ services:
     networks:
       - godzilla
     restart: always
-    image: docker.io/vickeyshrestha/service-stock-trader:0.0.1
+    image: docker.io/vickeyshrestha/service-stock-trader:0.0.2
     ports:
       - 5112:8085
       - 5113:8086
@@ -64,7 +64,7 @@ services:
       dbPassword: admin
       dbName: godzilla
       dbHost: godzilla-core-postgres
-      dbPort: 5104
+      dbPort: 5432
 
   godzilla-service-mongo-engine:
     container_name: godzilla-service-mongo-engine
