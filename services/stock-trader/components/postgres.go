@@ -11,5 +11,5 @@ type postgresClient struct {
 }
 
 func (p postgresClient) GetStatus(ctx context.Context) (*pb.Status, error) {
-	panic("implement me")
+	return &pb.Status{ServiceName: serviceName, Message: statusAlive}, nil
 }
