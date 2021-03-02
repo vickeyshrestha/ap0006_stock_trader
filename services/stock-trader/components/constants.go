@@ -9,3 +9,9 @@ const (
 const (
 	InfoSuccessfulConnectionDb = "successfully connected to database"
 )
+
+// general constants
+const (
+	serviceName = "stock-traders"
+	statusAlive = "Alive"
+)

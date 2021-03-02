@@ -11,7 +11,11 @@ type service struct {
 }
 
 func (s service) GetStatus(ctx context.Context, empty *emptypb.Empty) (*pb.Status, error) {
-	panic("implement me")
+	response, err := s.repositoryClient.GetStatus(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return response, nil
 }
 
 func (s service) GetActions(ctx context.Context, empty *emptypb.Empty) (*pb.ActionsResponse, error) {

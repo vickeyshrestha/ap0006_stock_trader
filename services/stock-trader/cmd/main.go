@@ -4,12 +4,21 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	grpcRunTime "github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	pb "github.com/vickeyshrestha/sharing-services/protobuf/stock_trader"
 	service "github/godzilla/services/stock-trader/components"
+	"google.golang.org/grpc"
+	grpcHealth "google.golang.org/grpc/health"
+	grpcHealthv1 "google.golang.org/grpc/health/grpc_health_v1"
+	"net"
 	"net/http"
 	"os"
+	"runtime"
 	"time"
+
+	"github.com/gorilla/handlers"
+
+	_ "github.com/jnewmano/grpc-json-proxy/codec"
 )
 
 func main() {
@@ -18,19 +27,12 @@ func main() {
 	databasePassword := os.Getenv("dbPassword")
 	databaseName := os.Getenv("dbName")
 	configFileFullPath := "config.json"
-	// configFileFullPath := "C:\Projects-Golang\src\godzilla\services\stock-trader\cmd\main.go" // while using windows for dev purpose only
+	//configFileFullPath := "C:\\Projects-Golang\\src\\godzilla\\services\\stock-trader\\resources\\config.json" // while using windows for dev purpose only
 	configuration, err := readConfigJson(configFileFullPath)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-
-	// Echo instance
-	e := echo.New()
-
-	// Middleware
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
 
 	var repository service.RepositoryClient
 	var index = 1
@@ -45,29 +47,56 @@ func main() {
 		}
 		index++
 	}
-	startService(repository, configuration, e)
+	startGrpcServer(repository, configuration)
+	startHttpAgent(configuration)
+	runtime.Goexit()
 
 }
 
-func startService(repository service.RepositoryClient, config service.Configuration, e *echo.Echo) {
-	s := service.NewStockTraderService(repository)
-
-	// Routes
-	e.GET("/", hello)
-
-	// Start server
-	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", config.Httpport)))
-
-	// TODO: implement service here
-	ctx := context.Background()
-	s.GetStatus(ctx, nil)
+/*
+	starts grpc service
+*/
+func startGrpcServer(repository service.RepositoryClient, config service.Configuration) {
+	listener, err := net.Listen("tcp", config.GrpcPort)
+	if err != nil {
+		panic(err)
+	}
+	stockTraderService := service.NewStockTraderService(repository)
+	var server = grpc.NewServer()
+	pb.RegisterStockTraderServer(server, stockTraderService)
+	healthServer := grpcHealth.NewServer()
+	grpcHealthv1.RegisterHealthServer(server, healthServer)
+	go func() {
+		if err := server.Serve(listener); err != nil {
+			panic(err)
+		}
+	}()
 }
 
-// Handler
-func hello(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello, World!")
+/*
+	following method acts as an http agent for grpc protocol
+*/
+func startHttpAgent(config service.Configuration) {
+	var DialOptions []grpc.DialOption
+	DialOptions = append(DialOptions, grpc.WithInsecure())
+
+	go func() {
+		ctx := context.Background()
+		ctxWithCancel, cancel := context.WithCancel(ctx)
+		defer cancel()
+
+		mux := grpcRunTime.NewServeMux(grpcRunTime.WithMarshalerOption(grpcRunTime.MIMEWildcard, &grpcRunTime.JSONPb{}))
+		_ = pb.RegisterStockTraderHandlerFromEndpoint(ctxWithCancel, mux, config.GrpcPort, DialOptions)
+		if err := http.ListenAndServe(config.Httpport, handlers.CORS(handlers.AllowedHeaders([]string{"grpc-metadata-token", "content-type"}), handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS", "DELETE"}), handlers.AllowedOrigins([]string{"*"}))(mux)); err != nil {
+			panic(err)
+		}
+
+	}()
 }
 
+/*
+	reads configuration from Config.json file
+*/
 func readConfigJson(configFilePath string) (service.Configuration, error) {
 	configFromJsonFile := service.Configuration{}
 	configJsonFile, err := os.Open(configFilePath)
