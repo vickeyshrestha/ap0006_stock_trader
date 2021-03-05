@@ -4,7 +4,6 @@ import (
 	"fmt"
 	nats "github.com/vickeyshrestha/sharing-services/drivers/nats"
 	"log"
-	"os"
 )
 
 type TimeSeries struct {
@@ -24,8 +23,7 @@ type Stock struct {
 /*
 	core will start the business logic
 */
-func BeginCore() {
-	natsUrl := os.Getenv("natsUrl")
+func BeginCore(natsUrl string) {
 	encodedConnection, err := nats.NewNatsConnectionClient(natsUrl)
 	if err != nil {
 		fmt.Println(err)

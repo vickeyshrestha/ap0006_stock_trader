@@ -65,6 +65,7 @@ services:
       dbName: godzilla
       dbHost: godzilla-core-postgres
       dbPort: 5432
+      natsUrl: godzilla-core-messagebus:4222
 
   godzilla-service-mongo-engine:
     container_name: godzilla-service-mongo-engine

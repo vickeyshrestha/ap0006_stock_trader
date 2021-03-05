@@ -26,6 +26,7 @@ func main() {
 	databaseUserName := os.Getenv("dbUser")
 	databasePassword := os.Getenv("dbPassword")
 	databaseName := os.Getenv("dbName")
+	natsUrl := os.Getenv("natsUrl")
 	configFileFullPath := "config.json"
 	//configFileFullPath := "C:\\Projects-Golang\\src\\godzilla\\services\\stock-trader\\resources\\config.json" // while using windows for dev purpose only
 	configuration, err := readConfigJson(configFileFullPath)
@@ -47,7 +48,7 @@ func main() {
 		}
 		index++
 	}
-	go service.BeginCore()
+	go service.BeginCore(natsUrl)
 	startGrpcServer(repository, configuration)
 	startHttpAgent(configuration)
 	runtime.Goexit()
