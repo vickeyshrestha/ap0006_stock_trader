@@ -16,4 +16,4 @@ Create a database named "godzilla" once the postgres server is up and running vi
 
 | EndPoint Syntax        | Example           | Detail  |
 | ------------- |:-------------:| -----:|
-| /api/stock_trader/status      | http://localhost:5112/api/stock_trader/status/health | Get the health status of this application |
+| /api/stock_trader/status      | http://localhost:5112/api/stock_trader/status | Get the health status of this application |
