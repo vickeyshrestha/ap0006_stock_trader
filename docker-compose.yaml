@@ -23,6 +23,7 @@ services:
       - 5104:5432
     environment:
       POSTGRES_PASSWORD: admin
+      POSTGRES_DB: godzilla
 
   godzilla-core-mongo:
     container_name: godzilla-core-mongo
