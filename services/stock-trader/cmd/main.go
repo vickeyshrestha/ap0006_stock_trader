@@ -26,8 +26,8 @@ func main() {
 	databaseUserName := os.Getenv("dbUser")
 	databasePassword := os.Getenv("dbPassword")
 	databaseName := os.Getenv("dbName")
-	configFileFullPath := "config.json"
-	//configFileFullPath := "C:\\Projects-Golang\\src\\godzilla\\services\\stock-trader\\resources\\config.json" // while using windows for dev purpose only
+	//configFileFullPath := "config.json"
+	configFileFullPath := "C:\\Projects-Golang\\src\\godzilla\\services\\stock-trader\\resources\\config.json" // while using windows for dev purpose only
 	configuration, err := readConfigJson(configFileFullPath)
 	if err != nil {
 		fmt.Println(err)
@@ -47,6 +47,7 @@ func main() {
 		}
 		index++
 	}
+	go service.BeginCore()
 	startGrpcServer(repository, configuration)
 	startHttpAgent(configuration)
 	runtime.Goexit()
@@ -87,10 +88,10 @@ func startHttpAgent(config service.Configuration) {
 
 		mux := grpcRunTime.NewServeMux(grpcRunTime.WithMarshalerOption(grpcRunTime.MIMEWildcard, &grpcRunTime.JSONPb{}))
 		_ = pb.RegisterStockTraderHandlerFromEndpoint(ctxWithCancel, mux, config.GrpcPort, DialOptions)
+		fmt.Println("starting http and listening to port", config.Httpport)
 		if err := http.ListenAndServe(config.Httpport, handlers.CORS(handlers.AllowedHeaders([]string{"grpc-metadata-token", "content-type"}), handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS", "DELETE"}), handlers.AllowedOrigins([]string{"*"}))(mux)); err != nil {
 			panic(err)
 		}
-
 	}()
 }
 
