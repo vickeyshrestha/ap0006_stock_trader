@@ -7,10 +7,3 @@ Simulator stock will publish random numbers for each company listed under NASDAQ
 <br> C:\...godzilla\simulators\stock> builddocker.bat 0.0.1
 <br> Test by running docker run first before pushing into dockerhub
 <br> Use **docker push image:ver** to push into dockerhub
-
-
-**3. Service endpoints**
-
-| EndPoint Syntax        | Example           | Detail  |
-| ------------- |:-------------:| -----:|
-| /api/stock_trader/status      | http://localhost:5112/api/stock_trader/status/health | Get the health status of this application |
