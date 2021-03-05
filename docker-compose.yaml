@@ -23,6 +23,7 @@ services:
       - 5104:5432
     environment:
       POSTGRES_PASSWORD: admin
+      POSTGRES_DB: godzilla
 
   godzilla-core-mongo:
     container_name: godzilla-core-mongo
@@ -52,7 +53,7 @@ services:
     networks:
       - godzilla
     restart: always
-    image: docker.io/vickeyshrestha/service-stock-trader:0.0.2
+    image: docker.io/vickeyshrestha/service-stock-trader:0.0.3
     ports:
       - 5112:8085
       - 5113:8086
@@ -65,6 +66,7 @@ services:
       dbName: godzilla
       dbHost: godzilla-core-postgres
       dbPort: 5432
+      natsUrl: godzilla-core-messagebus:4222
 
   godzilla-service-mongo-engine:
     container_name: godzilla-service-mongo-engine

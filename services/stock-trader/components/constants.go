@@ -12,6 +12,7 @@ const (
 
 // general constants
 const (
-	serviceName = "stock-traders"
-	statusAlive = "Alive"
+	serviceName  = "stock-traders"
+	statusAlive  = "Alive"
+	SimNatsTopic = "SIM.TS.Stocks"
 )
