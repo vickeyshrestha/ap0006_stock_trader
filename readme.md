@@ -13,7 +13,7 @@ following dependencies should be taken care when docker-compose.yaml will run
 3. Postgres db (for storing our big data)
 
 **docker compose**
-- docker-compose.yaml is not for the internal godzilla repo but is for usage on the VM where all docker services will be running.
+- docker-compose.yaml can be used on the server to bring up all the required containers. 
 - setup docker-compose command on your linux VM using **sudo apt  install docker-compose**
 - run docker-compose.yaml on one of the available servers to bring all of the image's instaces up and running
 <br> _c:/> docker-compose -f docker-compose.yaml up -d_ (To bring up all docker instances)
