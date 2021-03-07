@@ -20,3 +20,5 @@ following dependencies should be taken care when docker-compose.yaml will run
 <br> _c:/> docker-compose -f docker-compose.yaml down_ (To bring down all docker instances)
   
 ![img.png](img.png)
+
+**please refer to each service's readme for further detail**
