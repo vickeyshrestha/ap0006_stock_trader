@@ -48,7 +48,7 @@ func main() {
 		}
 		index++
 	}
-	go service.BeginCore(natsUrl)
+	go service.Subscriber(natsUrl)
 	startGrpcServer(repository, configuration)
 	startHttpAgent(configuration)
 	runtime.Goexit()
