@@ -29,33 +29,42 @@ func main() {
 	personChanSend := make(chan *stocks.TimeSeries)
 	encodedNatsConnection.BindSendChan(stocks.SimNatsTopic, personChanSend)
 
+	var mNasdaq map[string]float64
+	mNasdaq = make(map[string]float64)
+
+	var mNYSE map[string]float64
+	mNYSE = make(map[string]float64)
+
+	var mLondonSE map[string]float64
+	mLondonSE = make(map[string]float64)
+
 	i := 0
 	for {
-
+		mNasdaq["CompanyA"] = rand.Float64()
+		mNasdaq["CompanyB"] = rand.Float64()
+		mNasdaq["CompanyC"] = rand.Float64()
+		mNasdaq["CompanyD"] = rand.Float64()
+		mNasdaq["CompanyE"] = rand.Float64()
 		sNasdaq := stocks.Stock{
-			CompanyA: rand.Float64(),
-			CompanyB: rand.Float64(),
-			CompanyC: rand.Float64(),
-			CompanyD: rand.Float64(),
-			CompanyE: rand.Float64(),
-			CompanyF: rand.Float64(),
-		}
-		sNYSE := stocks.Stock{
-			CompanyA: rand.Float64(),
-			CompanyB: rand.Float64(),
-			CompanyC: rand.Float64(),
-			CompanyD: rand.Float64(),
-			CompanyE: rand.Float64(),
-			CompanyF: rand.Float64(),
+			Companies: mNasdaq,
 		}
 
+		mNYSE["CompanyA"] = rand.Float64()
+		mNYSE["CompanyB"] = rand.Float64()
+		mNYSE["CompanyC"] = rand.Float64()
+		mNYSE["CompanyD"] = rand.Float64()
+		mNYSE["CompanyE"] = rand.Float64()
+		sNYSE := stocks.Stock{
+			Companies: mNYSE,
+		}
+
+		mLondonSE["CompanyA"] = rand.Float64()
+		mLondonSE["CompanyB"] = rand.Float64()
+		mLondonSE["CompanyC"] = rand.Float64()
+		mLondonSE["CompanyD"] = rand.Float64()
+		mLondonSE["CompanyE"] = rand.Float64()
 		sLondonSE := stocks.Stock{
-			CompanyA: rand.Float64(),
-			CompanyB: rand.Float64(),
-			CompanyC: rand.Float64(),
-			CompanyD: rand.Float64(),
-			CompanyE: rand.Float64(),
-			CompanyF: rand.Float64(),
+			Companies: mLondonSE,
 		}
 
 		// Create instance of type Request with Id set to
@@ -85,6 +94,10 @@ func main() {
 		// Pause and increment counter
 		time.Sleep(time.Second * 1)
 		i = i + 1
+
+		stocks.ClearMap(mNasdaq)
+		stocks.ClearMap(mNYSE)
+		stocks.ClearMap(mLondonSE)
 	}
 
 }
