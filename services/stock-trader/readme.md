@@ -1,9 +1,14 @@
-**service - stock trader**
+**Service - stock trader**
 
 Service stock trader will subscribe to a specific topics in NATS (topics published by simulator - stock by default) to get NASDAQ Stock Exchange, NY Stock Exchange, and London Stock Exchange data in a timeseries fashion.
 
-**db requirement**
-Create a database named "godzilla" once the postgres server is up and running via compose file 
+**architecture diagram**
+<br>
+![architecture](readme-resources/architecture.jpg)
+
+
+**Database requirement**
+<br>database named "godzilla" should be taken care by docker-compose
 
 **building and pushing docker image**
 <br> Run the builddocker.bat file by passing the version as an argument. For eg:
