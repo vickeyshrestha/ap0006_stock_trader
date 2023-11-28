@@ -1,11 +1,15 @@
 module godzilla/simulators/stock
 
-go 1.15
+go 1.21.4
 
-replace github.com/vickeyshrestha/sharing-services/drivers/nats => ../../../github.com/vickeyshrestha/sharing-services/drivers/nats
+//github.com/vickeyshrestha/sharing-services v0.0.6 // indirect
+require github.com/vickeyshrestha/sharing-services v0.0.14
 
 require (
-	//github.com/vickeyshrestha/sharing-services v0.0.6 // indirect
-	github.com/vickeyshrestha/sharing-services/drivers/nats v0.0.4
-	google.golang.org/protobuf v1.25.0
+	github.com/klauspost/compress v1.17.3 // indirect
+	github.com/nats-io/nats.go v1.31.0 // indirect
+	github.com/nats-io/nkeys v0.4.6 // indirect
+	github.com/nats-io/nuid v1.0.1 // indirect
+	golang.org/x/crypto v0.16.0 // indirect
+	golang.org/x/sys v0.15.0 // indirect
 )

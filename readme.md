@@ -22,3 +22,8 @@ following dependencies should be taken care when docker-compose.yaml will run
 ![img.png](img.png)
 
 **please refer to each service's readme for further detail**
+
+**troubleshooting**
+If you are having difficulty to sync dependencies from vickeyshrestha/sharing-services with 404 error, just add the following to bypass the GOPROXY for private dependencies:
+<br> export GOPROXY=direct
+<br> export GOPRIVATE=github.com/vickeyshrestha/sharing-services
