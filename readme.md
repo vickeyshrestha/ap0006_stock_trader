@@ -1,26 +1,31 @@
 <h1>Godzilla</h1>
 
 Godzilla is a microservice platform that structures an application as a collection of services that are highly maintainable, loosely coupled, independently deployable and organized around business capabilities.
-<br> At this moment, the heart of this platform is the service 'stock-trader'. Please refer to readme file under 'services/stock-trader/readme.md'
+
 
 <h2>List of Services</h2>
-1. [Stock Trader](services/stock-trader/readme.md)
-2. [Mongo Engine](services/mongo-engine/readme.md)
-3. [File Transfer Engine](services/file-transfer-engine/readme.md)
-<br> and a [Stock Simulator](simulators/stock/readme.md) required for Stock Trader
+
+**please refer to each service's readme for further detail**
+
+
+| Service                                                 |                                                         Short Description                                                         | 
+|---------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------:| 
+| Stock Trader                                            |   subscribes to a specific topics in NATS to get Stock Exchange data in a TimeSeries fashion and inserts them into Postgres db    | 
+| Mongo Engine                                            |                                 connects to mongoDb to fetch the KV configurations for the client                                 | 
+| File Transfer Engine                                    |                              utilizes byte streaming mechanism to transfer a huge sized single file                               |
+| Stock Simulator (Not really a Service, but a simulator) | publishes random numbers for companies listed under stock exchange into messagebus (NATS) to be consumed by other client services |
 
 <h3>prerequisite software</h3>
-1. Docker
-2. access to vickeyshrestha Dockerhub account to push images
+Docker should be installed in order to run the containers
 
-following dependencies should be taken care when docker-compose.yaml will run
+The following dependencies should be taken care when docker-compose.yaml will run
 1. Nats (we can use a sample server as defined in docker-compose.yaml)
 2. Mongodb - to store some KV pairs
 3. Postgres db (for storing our big data)
 4. Hasura (GraphQL server that gives instant, realtime GraphQL APIs over Postgres)
 
 <h3>docker compose</h3>
-- docker-compose.yaml can be used on the server to bring up all the required containers. 
+- docker-compose.yaml can be used on the server to bring up all the required containers 
 - setup docker-compose command on your linux VM using **sudo apt  install docker-compose**
 - run docker-compose.yaml on one of the available servers to bring all the image's instances up and running
 <br> _c:/> docker-compose -f docker-compose.yaml up -d_ (To bring up all docker instances)
