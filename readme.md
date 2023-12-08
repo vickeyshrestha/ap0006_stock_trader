@@ -4,14 +4,14 @@ Godzilla is a microservice platform that structures an application as a collecti
 <br> At this moment, the heart of this platform is the service 'stock-trader'. Please refer to readme file under 'services/stock-trader/readme.md'
 
 <h2>List of Services</h2>
-1. [Stock Trader](file:///services/stock-trader/readme.md)
-2. [Mongo Engine](services/mongo-engine/readme.md)
-3. [File Transfer Engine](services/file-transfer-engine/readme.md)
+[Stock Trader](services/stock-trader/readme.md)
+[Mongo Engine](services/mongo-engine/readme.md)
+[File Transfer Engine](services/file-transfer-engine/readme.md)
 <br> and a [Stock Simulator](simulators/stock/readme.md) required for Stock Trader
 
 <h3>prerequisite software</h3>
 1. Docker
-2. access to vickeyshrestha Dockerhub account to push images
+2. Access to vickeyshrestha Dockerhub account to push images
 
 following dependencies should be taken care when docker-compose.yaml will run
 1. Nats (we can use a sample server as defined in docker-compose.yaml)
