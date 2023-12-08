@@ -6,7 +6,7 @@ import (
 	"github.com/cucumber/godog"
 	"godzilla/services/mongo-engine/internal/healthCheck"
 	"godzilla/services/mongo-engine/mocks"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -80,7 +80,7 @@ func (a *apiFeature) iShouldBeGettingAsExpected(httpCode int) error {
 
 func (a *apiFeature) aJSONResponseWithAnd(applicationName, healthStatus string) error {
 	var jsonResponseForHealth healthCheck.HealthEndpoint
-	body, _ := ioutil.ReadAll(a.resp.Body)
+	body, _ := io.ReadAll(a.resp.Body)
 	_ = json.Unmarshal(body, &jsonResponseForHealth)
 	if !strings.EqualFold(string(jsonResponseForHealth.Application), applicationName) {
 		return fmt.Errorf("expected application name: %s, Actual: %s", applicationName, string(jsonResponseForHealth.Application))

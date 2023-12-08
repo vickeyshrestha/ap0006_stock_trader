@@ -1,3 +1,4 @@
+<h1>Mongo Engine</h1>
 **1. Introduction**
 
 This application connects to mongoDb to fetch the KV configurations for the client. The client can request for configs using HTTP interface.
@@ -103,26 +104,9 @@ If you simply want to run this application in its non-containerized form, i.e. j
         
 <br>
 
-**8. Vendorizing dependencies**
-
-_`prerequisite: Please install govendor tool available at https://github.com/kardianos/govendor`_
-
-Remember to vendorize your dependencies as well:
-
-TO ADD:
-
-govendor init
-
-govendor add +external
-
-
-TO REMOVE ALL/ CLEAN VENDOR DIRECTORY:
-
-govendor remove +v
-
 <br>
 
-**9. To use behavior driven test (BDT) and running Unit test**
+**8. To use behavior driven test (BDT) and running Unit test**
 
 _`prerequisite: Please install godog available at https://github.com/DATA-DOG/godog`_
 
