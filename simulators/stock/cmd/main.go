@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	nats "github.com/vickeyshrestha/sharing-services/drivers/nats"
+	"github.com/vickeyshrestha/sharing-services/drivers/nats"
 	stocks "godzilla/simulators/stock/components"
 	"log"
 	"math/rand"
@@ -92,7 +92,7 @@ func main() {
 		personChanSend <- &reqLonSE
 
 		// Pause and increment counter
-		time.Sleep(time.Second * 1)
+		time.Sleep(time.Second * 5)
 		i = i + 1
 
 		stocks.ClearMap(mNasdaq)
