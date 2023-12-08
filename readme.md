@@ -4,7 +4,9 @@ Godzilla is a microservice platform that structures an application as a collecti
 
 
 <h2>List of Services</h2>
+
 **please refer to each service's readme for further detail**
+
 1. Stock Trader
 2. Mongo Engine
 3. File Transfer Engine
