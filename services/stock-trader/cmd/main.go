@@ -14,6 +14,7 @@ import (
 	"net/http"
 	"os"
 	"runtime"
+	"sync"
 	"time"
 
 	"github.com/gorilla/handlers"
@@ -28,7 +29,7 @@ func main() {
 	databaseName := os.Getenv("dbName")
 	natsUrl := os.Getenv("natsUrl")
 	configFileFullPath := "config.json"
-	//configFileFullPath := "C:\\Projects-Golang\\src\\godzilla\\services\\stock-trader\\resources\\config.json" // while using windows for dev purpose only
+	//configFileFullPath := "I:\\go\\src\\godzilla\\services\\stock-trader\\resources\\config.json" // while using windows for dev purpose only
 	configuration, err := readConfigJson(configFileFullPath)
 	if err != nil {
 		fmt.Println(err)
@@ -48,7 +49,22 @@ func main() {
 		}
 		index++
 	}
-	go service.Subscriber(natsUrl)
+
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		fmt.Println("Starting Subscriber")
+		service.Subscriber(natsUrl)
+	}()
+	go func() {
+		defer wg.Done()
+		fmt.Println("Starting Dequeue")
+		service.Dequeue()
+	}()
+
+	// TODO: Third Go routine that would calculate the Mean and inserts into the table
+	wg.Wait()
 	startGrpcServer(repository, configuration)
 	startHttpAgent(configuration)
 	runtime.Goexit()
@@ -56,7 +72,7 @@ func main() {
 }
 
 /*
-	starts grpc service
+starts grpc service
 */
 func startGrpcServer(repository service.RepositoryClient, config service.Configuration) {
 	listener, err := net.Listen("tcp", config.GrpcPort)
@@ -76,7 +92,7 @@ func startGrpcServer(repository service.RepositoryClient, config service.Configu
 }
 
 /*
-	following method acts as an http agent for grpc protocol
+following method acts as an http agent for grpc protocol
 */
 func startHttpAgent(config service.Configuration) {
 	var DialOptions []grpc.DialOption
@@ -97,7 +113,7 @@ func startHttpAgent(config service.Configuration) {
 }
 
 /*
-	reads configuration from Config.json file
+reads configuration from Config.json file
 */
 func readConfigJson(configFilePath string) (service.Configuration, error) {
 	configFromJsonFile := service.Configuration{}

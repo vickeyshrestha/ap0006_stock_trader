@@ -39,7 +39,7 @@ services:
     networks:
       - godzilla
     restart: always
-    image: docker.io/vickeyshrestha/simulator-stock:0.0.3
+    image: docker.io/vickeyshrestha/simulator-stock:0.0.4
     ports:
       - 5111:8085
     depends_on:
