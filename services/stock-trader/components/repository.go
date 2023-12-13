@@ -10,6 +10,7 @@ import (
 
 type RepositoryClient interface {
 	GetStatus(ctx context.Context) (*pb.Status, error)
+	GetActions(ctx context.Context) (*pb.ActionsResponse, error)
 }
 
 func NewRepositoryClient(databaseUserName, databasePassword, databaseName string, config Configuration) (RepositoryClient, error) {
@@ -31,9 +32,9 @@ func NewRepositoryClient(databaseUserName, databasePassword, databaseName string
 		dbPort = config.DatabasePort
 	}
 
-	pstgrsDriver, err := sql.NewPostgresDbConnection(dbHostName, databaseUserName, databasePassword, databaseName, dbPort)
+	postgresDriver, err := sql.NewPostgresDbConnection(dbHostName, databaseUserName, databasePassword, databaseName, dbPort)
 	if err != nil {
 		return nil, err
 	}
-	return &postgresClient{postgresDriver: *pstgrsDriver}, nil
+	return &postgresClient{postgresDriver: *postgresDriver}, nil
 }

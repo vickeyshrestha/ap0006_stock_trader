@@ -12,7 +12,10 @@ const (
 
 // general constants
 const (
-	serviceName  = "stock-traders"
-	statusAlive  = "Alive"
-	SimNatsTopic = "SIM.TS.Stocks"
+	serviceName                     = "stock-traders"
+	statusAlive                     = "Alive"
+	SimNatsTopic                    = "SIM.TS.Stocks"
+	DequeueProcessIntervalInSeconds = 8
+	TimeToCalculateValuesAndDequeue = 8
+	QueueSize                       = 15
 )

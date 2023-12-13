@@ -19,7 +19,11 @@ func (s service) GetStatus(ctx context.Context, empty *emptypb.Empty) (*pb.Statu
 }
 
 func (s service) GetActions(ctx context.Context, empty *emptypb.Empty) (*pb.ActionsResponse, error) {
-	panic("implement me")
+	response, err := s.repositoryClient.GetActions(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return response, nil
 }
 
 func NewStockTraderService(repoClt RepositoryClient) pb.StockTraderServer {
