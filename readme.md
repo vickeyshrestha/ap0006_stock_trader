@@ -1,6 +1,6 @@
 <h1>Godzilla</h1>
 
-Godzilla is a microservice platform that structures an application as a collection of services that are highly maintainable, loosely coupled, independently deployable and organized around business capabilities.
+Godzilla is a **microservice** platform that structures an application as a collection of services that are highly maintainable, loosely coupled, independently deployable and organized around business capabilities.
 
 
 <h2>List of Services</h2>
