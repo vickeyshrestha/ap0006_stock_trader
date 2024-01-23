@@ -1,18 +1,18 @@
 <h1>Godzilla</h1>
 
-Godzilla is a **microservice** platform that structures an application as a collection of services that are highly maintainable, loosely coupled, independently deployable and organized around business capabilities.
+Godzilla is a **microservice** platform that structures an application as a collection of services that are highly maintainable, loosely coupled, independently deployable, and organized around business capabilities.
 
 
 <h2>List of Services</h2>
 
-**please refer to each service's readme for further detail**
+**Please refer to each service's readme for further detail**
 
 
 | Service                                                 |                                                         Short Description                                                         | 
 |---------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------:| 
-| Stock Trader                                            |   subscribes to a specific topics in NATS to get Stock Exchange data in a TimeSeries fashion and inserts them into Postgres db    | 
-| Mongo Engine                                            |                                 connects to mongoDb to fetch the KV configurations for the client                                 | 
-| File Transfer Engine                                    |                              utilizes byte streaming mechanism to transfer a huge sized single file                               |
+| Stock Trader                                            |   subscribes to a specific topic in NATS to get Stock Exchange data in a TimeSeries fashion and inserts them into Postgres db    | 
+| Mongo Engine                                            |                                 connects to MongoDB to fetch the KV configurations for the client                                 | 
+| File Transfer Engine                                    |                              utilizes byte streaming mechanism to transfer a huge-sized single file                               |
 | Stock Simulator (Not really a Service, but a simulator) | publishes random numbers for companies listed under stock exchange into messagebus (NATS) to be consumed by other client services |
 
 <h3>prerequisite software</h3>
