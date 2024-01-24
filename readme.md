@@ -13,10 +13,11 @@ Godzilla is a **microservice** platform that structures an application as a coll
 | Stock Trader                                            |   subscribes to a specific topic in NATS to get Stock Exchange data in a TimeSeries fashion and inserts them into Postgres db  https://github.com/vickeyshrestha/godzilla/blob/master/services/stock-trader/readme.md  | 
 | Mongo Engine                                            |                                 connects to MongoDB to fetch the KV configurations for the client                                 | 
 | File Transfer Engine                                    |                              utilizes byte streaming mechanism to transfer a huge-sized single file                               |
-| Stock Simulator (Not really a Service, but a simulator) | publishes random numbers for companies listed under stock exchange into messagebus (NATS) to be consumed by other client services |
+| Simulators/stock (Not really a Service, but a simulator) | publishes random numbers for companies listed under stock exchange into messagebus (NATS) to be consumed by other client services https://github.com/vickeyshrestha/godzilla/blob/master/simulators/stock/readme.md |
+| Realtime/stock (Real-time stock info limited by free API key - ON HALT) | Fetches the real-time stock information. Since free API is limited to 25 requests per day, use the simulator instead https://github.com/vickeyshrestha/godzilla/blob/master/simulators/stock/readme.md |
 
 <h3>prerequisite software</h3>
-Docker should be installed in order to run the containers
+Docker should be installed to run the containers
 
 The following dependencies should be taken care when docker-compose.yaml will run
 1. Nats (we can use a sample server as defined in docker-compose.yaml)
