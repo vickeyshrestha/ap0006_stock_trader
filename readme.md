@@ -10,7 +10,7 @@ Godzilla is a **microservice** platform that structures an application as a coll
 
 | Service                                                 |                                                         Short Description                                                         | 
 |---------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------:| 
-| Stock Trader                                            |   subscribes to a specific topic in NATS to get Stock Exchange data in a TimeSeries fashion and inserts them into Postgres db  https://github.com/vickeyshrestha/godzilla/blob/master/services/stock-trader/readme.md  | 
+| Stock Trader                                            |   subscribes to a specific topic in NATS to get Stock Exchange data in a TimeSeries fashion and inserts them into Postgres db [ReadMe](https://github.com/vickeyshrestha/godzilla/blob/master/services/stock-trader/readme.md)  | 
 | Mongo Engine                                            |                                 connects to MongoDB to fetch the KV configurations for the client                                 | 
 | File Transfer Engine                                    |                              utilizes byte streaming mechanism to transfer a huge-sized single file                               |
 | Simulators/stock (Not really a Service, but a simulator) | publishes random numbers for companies listed under stock exchange into messagebus (NATS) to be consumed by other client services https://github.com/vickeyshrestha/godzilla/blob/master/simulators/stock/readme.md |
