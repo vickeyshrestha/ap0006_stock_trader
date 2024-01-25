@@ -1,6 +1,6 @@
-<h1>Godzilla</h1>
+<h1>Stockzilla</h1>
 
-Godzilla is a **microservice** platform that structures an application as a collection of services that are highly maintainable, loosely coupled, independently deployable, and organized around business capabilities.
+Stockzilla is a **microservice** platform that structures an application as a collection of services that are highly maintainable, loosely coupled, independently deployable, and organized around business capabilities.
 
 
 <h2>List of Services</h2>
@@ -10,11 +10,11 @@ Godzilla is a **microservice** platform that structures an application as a coll
 
 | Service                                                 |                                                         Short Description                                                         | 
 |---------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------:| 
-| Stock Trader                                            |   subscribes to a specific topic in NATS to get Stock Exchange data in a TimeSeries fashion and inserts them into Postgres db [More on ReadMe](https://github.com/vickeyshrestha/godzilla/blob/master/services/stock-trader/readme.md)  | 
+| Stock Trader                                            |   subscribes to a specific topic in NATS to get Stock Exchange data in a TimeSeries fashion and inserts them into Postgres db [More on ReadMe](https://github.com/vickeyshrestha/stockzilla/blob/master/services/stock-trader/readme.md)  | 
 | Mongo Engine                                            |                                 connects to MongoDB to fetch the KV configurations for the client                                 | 
 | File Transfer Engine                                    |                              utilizes byte streaming mechanism to transfer a huge-sized single file                               |
-| Simulators/stock (Not really a Service, but a simulator) | publishes random numbers for companies listed under stock exchange into messagebus (NATS) to be consumed by other client services [More On ReadMe](https://github.com/vickeyshrestha/godzilla/blob/master/simulators/stock/readme.md) |
-| Realtime/stock (Real-time stock info limited by free API key - ON HALT) | Fetches the real-time stock information. Since free API is limited to 25 requests per day, use the simulator instead [More On ReadMe](https://github.com/vickeyshrestha/godzilla/blob/master/realtime/stock/readme.md) |
+| Simulators/stock (Not really a Service, but a simulator) | publishes random numbers for companies listed under stock exchange into messagebus (NATS) to be consumed by other client services [More On ReadMe](https://github.com/vickeyshrestha/stockzilla/blob/master/simulators/stock/readme.md) |
+| Realtime/stock (Real-time stock info limited by free API key - ON HALT) | Fetches the real-time stock information. Since free API is limited to 25 requests per day, use the simulator instead [More On ReadMe](https://github.com/vickeyshrestha/stockzilla/blob/master/realtime/stock/readme.md) |
 
 <h3>prerequisite software</h3>
 Docker should be installed to run the containers
@@ -43,12 +43,12 @@ If you are having difficulty to sync dependencies from vickeyshrestha/sharing-se
 
 <h3>Database Credentials</h3>
 Refer to docker-compose file. The default username is postgres
-<br> You can run godzilla\services\stock-trader\database\stock-trader.sql against the database, **godzilla**
+<br> You can run stockzilla\services\stock-trader\database\stock-trader.sql against the database, **stockzilla**
 
 <h3>Connect database through Hasura</h3>
 go to http://localhost:8080/console
 <br> go to Data tab
 <br> Select Postgres and click "Connect existing Database"
-<br> Give database name as "godzilla"
+<br> Give database name as "stockzilla"
 <br> Under "Connect database via" option, select "Environment Variable"
 <br> Then enter "PG_DATABASE_URL" as a variable and click "Connect"
