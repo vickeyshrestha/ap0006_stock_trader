@@ -1,4 +1,4 @@
-module godzilla/services/file-transfer-engine
+module stockzilla/services/file-transfer-engine
 
 go 1.21.4
 

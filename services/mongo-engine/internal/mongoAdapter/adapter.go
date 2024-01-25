@@ -2,12 +2,12 @@ package mongoAdapter
 
 import (
 	"encoding/json"
-	engine "godzilla/services/mongo-engine"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 	"io/ioutil"
 	"log"
 	"net/http"
+	engine "stockzilla/services/mongo-engine"
 	"strconv"
 )
 
@@ -26,14 +26,14 @@ func NewServer(config engine.InitialConfig) (engine.MongoAdapter, error) {
 }
 
 /*
-	For defer close
+For defer close
 */
 func (s *Server) Close() {
 	s.session.Close()
 }
 
 /*
-	Inserts new record (configuration) into MongoDB
+Inserts new record (configuration) into MongoDB
 */
 func (s *Server) InsertNewConfig(w http.ResponseWriter, r *http.Request) {
 	session := s.session.Copy()
@@ -59,7 +59,7 @@ func (s *Server) InsertNewConfig(w http.ResponseWriter, r *http.Request) {
 }
 
 /*
-	Returns all records as JSON from collection
+Returns all records as JSON from collection
 */
 func (s *Server) GetClientConfigAll(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -79,7 +79,7 @@ func (s *Server) GetClientConfigAll(w http.ResponseWriter, r *http.Request) {
 }
 
 /*
-	Returns collection as JSON based of Application Name, Binary Version and Site
+Returns collection as JSON based of Application Name, Binary Version and Site
 */
 func (s *Server) GetClientConfigBasedOnAppNameAndBinaryVersionAndSite(w http.ResponseWriter, r *http.Request) {
 	var responseByte []byte
@@ -126,7 +126,7 @@ func (s *Server) GetClientConfigBasedOnAppNameAndBinaryVersionAndSite(w http.Res
 }
 
 /*
-	Delete record using appName, binary version & site
+Delete record using appName, binary version & site
 */
 func (s *Server) DeleteRecordUsingID(w http.ResponseWriter, r *http.Request) {
 	var responseByte []byte

@@ -1,4 +1,4 @@
-module godzilla/services/mongo-engine
+module stockzilla/services/mongo-engine
 
 go 1.21.4
 

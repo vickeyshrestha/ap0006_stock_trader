@@ -1,9 +1,9 @@
 package main
 
 import (
-	"godzilla/services/mongo-engine/internal/applicationDriver"
-	"godzilla/services/mongo-engine/internal/initialConfig"
 	"log"
+	"stockzilla/services/mongo-engine/internal/applicationDriver"
+	"stockzilla/services/mongo-engine/internal/initialConfig"
 )
 
 func main() {

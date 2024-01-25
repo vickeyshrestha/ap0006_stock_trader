@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/cucumber/godog"
-	"godzilla/services/mongo-engine/internal/healthCheck"
-	"godzilla/services/mongo-engine/mocks"
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"stockzilla/services/mongo-engine/internal/healthCheck"
+	"stockzilla/services/mongo-engine/mocks"
 	"strings"
 	"time"
 )

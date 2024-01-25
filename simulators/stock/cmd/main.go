@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 	"github.com/vickeyshrestha/sharing-services/drivers/nats"
-	stocks "godzilla/simulators/stock/components"
 	"log"
 	"math/rand"
 	"os"
+	stocks "stockzilla/simulators/stock/components"
 	"time"
 )
 

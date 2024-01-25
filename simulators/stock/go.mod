@@ -1,4 +1,4 @@
-module godzilla/simulators/stock
+module stockzilla/simulators/stock
 
 go 1.21.4
 

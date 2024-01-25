@@ -1,10 +1,10 @@
 package healthCheck_test
 
 import (
-	"godzilla/services/mongo-engine/internal/healthCheck"
-	"godzilla/services/mongo-engine/mocks"
 	"net/http"
 	"net/http/httptest"
+	"stockzilla/services/mongo-engine/internal/healthCheck"
+	"stockzilla/services/mongo-engine/mocks"
 	"testing"
 	"time"
 )
