@@ -2,10 +2,10 @@ version: "2"
 
 services:
 
-  godzilla-core-messagebus:
-    container_name: godzilla-core-messagebus
+  stockzilla-core-messagebus:
+    container_name: stockzilla-core-messagebus
     networks:
-      - godzilla
+      - stockzilla
     restart: always
     image: docker.io/vickeyshrestha/nats:1.0.0
     ports:
@@ -13,86 +13,86 @@ services:
       - 5102:6222
       - 5103:8222
 
-  godzilla-core-postgres:
-    container_name: godzilla-core-postgres
+  stockzilla-core-postgres:
+    container_name: stockzilla-core-postgres
     networks:
-      - godzilla
+      - stockzilla
     restart: always
     image: docker.io/vickeyshrestha/postgres:1.0.0
     ports:
       - 5104:5432
     environment:
       POSTGRES_PASSWORD: admin
-      POSTGRES_DB: godzilla
+      POSTGRES_DB: stockzilla
 
-  godzilla-core-mongo:
-    container_name: godzilla-core-mongo
+  stockzilla-core-mongo:
+    container_name: stockzilla-core-mongo
     networks:
-      - godzilla
+      - stockzilla
     restart: always
     image: docker.io/vickeyshrestha/mongo:1.0.0
     ports:
       - 5105:27017
 
-  godzilla-simulator-stock:
-    container_name: godzilla-simulator-stock
+  stockzilla-simulator-stock:
+    container_name: stockzilla-simulator-stock
     networks:
-      - godzilla
+      - stockzilla
     restart: always
     image: docker.io/vickeyshrestha/simulator-stock:0.0.4
     ports:
       - 5111:8085
     depends_on:
-      - godzilla-core-messagebus
+      - stockzilla-core-messagebus
     environment:
-      natsHost: godzilla-core-messagebus
+      natsHost: stockzilla-core-messagebus
       natsPort: 4222
 
-  godzilla-service-stock-trader:
-    container_name: godzilla-service-stock-trader
+  stockzilla-service-stock-trader:
+    container_name: stockzilla-service-stock-trader
     networks:
-      - godzilla
+      - stockzilla
     restart: always
     image: docker.io/vickeyshrestha/service-stock-trader:0.0.4
     ports:
       - 5112:8085
       - 5113:8086
     depends_on:
-      - godzilla-core-messagebus
-      - godzilla-core-postgres
+      - stockzilla-core-messagebus
+      - stockzilla-core-postgres
     environment:
       dbUser: postgres
       dbPassword: admin
-      dbName: godzilla
-      dbHost: godzilla-core-postgres
+      dbName: stockzilla
+      dbHost: stockzilla-core-postgres
       dbPort: 5432
-      natsUrl: godzilla-core-messagebus:4222
+      natsUrl: stockzilla-core-messagebus:4222
 
-  godzilla-service-mongo-engine:
-    container_name: godzilla-service-mongo-engine
+  stockzilla-service-mongo-engine:
+    container_name: stockzilla-service-mongo-engine
     networks:
-      - godzilla
+      - stockzilla
     restart: always
     image: docker.io/vickeyshrestha/ap0001_mongo_engine:00.00.07
     ports:
       - 5114:8085
     depends_on:
-      - godzilla-core-mongo
+      - stockzilla-core-mongo
     environment:
-      mongoHostAndPort: godzilla-core-mongo:27017
+      mongoHostAndPort: stockzilla-core-mongo:27017
 
   graphql-engine:
     image: hasura/graphql-engine:v2.35.0
     networks:
-      - godzilla
+      - stockzilla
     ports:
       - "8080:8080"
     restart: always
     environment:
       ## postgres database to store Hasura metadata
-      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:admin@godzilla-core-postgres:5432/godzilla
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:admin@stockzilla-core-postgres:5432/stockzilla
       ## this env var can be used to add the above postgres database to Hasura as a data source. this can be removed/updated based on your needs
-      PG_DATABASE_URL: postgres://postgres:admin@godzilla-core-postgres:5432/godzilla
+      PG_DATABASE_URL: postgres://postgres:admin@stockzilla-core-postgres:5432/stockzilla
       ## enable the console served by server
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       ## enable debugging mode. It is recommended to disable this in production
@@ -111,7 +111,7 @@ services:
     image: hasura/graphql-data-connector:v2.35.0
     restart: always
     networks:
-      - godzilla
+      - stockzilla
     ports:
       - 8081:8081
     environment:
@@ -126,26 +126,26 @@ services:
       retries: 5
       start_period: 5s
 
-  # godzilla-big-file:
-  #   container_name: godzilla-big-file
+  # stockzilla-big-file:
+  #   container_name: stockzilla-big-file
   #   networks:
-  #     - godzilla
+  #     - stockzilla
   #   restarts: always
-  #   image: docker.io/vickeyshrestha/godzilla-big-file:0.0.1
+  #   image: docker.io/vickeyshrestha/stockzilla-big-file:0.0.1
   #   ports:
   #     - 5007: 8085
   #   depends_on:
-  #     - godzilla-sql
+  #     - stockzilla-sql
   #   environment:
   #     env: dev
   #     config_file: config
 
 # Add any volumes here if required
 volumes:
-  godzilla-sql:
+  stockzilla-sql:
 
 networks:
-  godzilla:
+  stockzilla:
     driver: "bridge"
       #ipam:
       # driver: default

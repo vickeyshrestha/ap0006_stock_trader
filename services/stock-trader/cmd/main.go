@@ -6,7 +6,7 @@ import (
 	"fmt"
 	grpcRunTime "github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	pb "github.com/vickeyshrestha/sharing-services/protobuf/stock_trader"
-	service "github/godzilla/services/stock-trader/components"
+	service "github/stockzilla/services/stock-trader/components"
 	"google.golang.org/grpc"
 	grpcHealth "google.golang.org/grpc/health"
 	grpcHealthv1 "google.golang.org/grpc/health/grpc_health_v1"
@@ -29,7 +29,7 @@ func main() {
 	databaseName := os.Getenv("dbName")
 	natsUrl := os.Getenv("natsUrl")
 	configFileFullPath := "config.json"
-	//configFileFullPath := "I:\\go\\src\\godzilla\\services\\stock-trader\\resources\\config.json" // while using windows for dev purpose only
+	//configFileFullPath := "I:\\go\\src\\stockzilla\\services\\stock-trader\\resources\\config.json" // while using windows for dev purpose only
 	configuration, err := readConfigJson(configFileFullPath)
 	if err != nil {
 		fmt.Println(err)

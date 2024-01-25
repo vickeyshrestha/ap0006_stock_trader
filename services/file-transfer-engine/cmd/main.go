@@ -1,8 +1,8 @@
 package main
 
 import (
-	component "godzilla/services/file-transfer-engine/components"
 	"net/http"
+	component "stockzilla/services/file-transfer-engine/components"
 )
 
 func main() {
