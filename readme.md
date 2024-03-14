@@ -52,7 +52,7 @@ go to http://localhost:8080/console
 <br> Under "Connect database via" option, select "Environment Variable"
 <br> Then enter "PG_DATABASE_URL" as a variable and click "Connect"
 
-<h3>Techstacks used:</h3>
+##Techstacks used:
 - Golang
 - Docker
 - Nats Message bus
