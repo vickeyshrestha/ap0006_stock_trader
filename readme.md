@@ -28,8 +28,8 @@ The following dependencies should be taken care when docker-compose.yaml will ru
 - docker-compose.yaml can be used on the server to bring up all the required containers 
 - setup docker-compose command on your linux VM using **sudo apt  install docker-compose**
 - run docker-compose.yaml on one of the available servers to bring all the image's instances up and running
-<br> _c:/> docker-compose -f docker-compose.yaml up -d_ (To bring up all docker instances)
-<br> _c:/> docker-compose -f docker-compose.yaml down_ (To bring down all docker instances)
+<br> c:/> docker-compose -f docker-compose.yaml up -d (To bring up all docker instances)
+<br> c:/> docker-compose -f docker-compose.yaml down (To bring down all docker instances)
   
 ![img.png](img.png)
 
@@ -51,3 +51,11 @@ go to http://localhost:8080/console
 <br> Give database name as "stockzilla"
 <br> Under "Connect database via" option, select "Environment Variable"
 <br> Then enter "PG_DATABASE_URL" as a variable and click "Connect"
+
+<h3>Techstacks used:
+- Golang
+- Docker
+- Nats Message bus
+- Postgres
+- Mongo DB
+- Hasura
