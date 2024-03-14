@@ -14,7 +14,6 @@ Stockzilla is a **microservice** platform that structures an application as a co
 | Mongo Engine                                            |                                 connects to MongoDB to fetch the KV configurations for the client                                 | 
 | File Transfer Engine                                    |                              utilizes byte streaming mechanism to transfer a huge-sized single file                               |
 | Simulators/stock (Not really a Service, but a simulator) | publishes random numbers for companies listed under stock exchange into messagebus (NATS) to be consumed by other client services [More On ReadMe](https://github.com/vickeyshrestha/stockzilla/blob/master/simulators/stock/readme.md) |
-| Realtime/stock (Real-time stock info limited by free API key - ON HALT) | Fetches the real-time stock information. Since free API is limited to 25 requests per day, use the simulator instead [More On ReadMe](https://github.com/vickeyshrestha/stockzilla/blob/master/realtime/stock/readme.md) |
 
 <h3>prerequisite software</h3>
 Docker should be installed to run the containers

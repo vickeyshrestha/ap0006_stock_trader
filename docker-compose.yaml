@@ -126,20 +126,6 @@ services:
       retries: 5
       start_period: 5s
 
-  # stockzilla-big-file:
-  #   container_name: stockzilla-big-file
-  #   networks:
-  #     - stockzilla
-  #   restarts: always
-  #   image: docker.io/vickeyshrestha/stockzilla-big-file:0.0.1
-  #   ports:
-  #     - 5007: 8085
-  #   depends_on:
-  #     - stockzilla-sql
-  #   environment:
-  #     env: dev
-  #     config_file: config
-
 # Add any volumes here if required
 volumes:
   stockzilla-sql:
