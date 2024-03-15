@@ -5,7 +5,8 @@ Stockzilla is a **microservice** platform that structures an application as a co
 
 <h2>List of Services</h2>
 
-**Please refer to each service's readme for further detail**
+**Each of the following services evolves and deploys independently, reducing the risk and time associated with coordinating changes across an entire application.
+Please refer to each service's readme for further detail**
 
 
 | Service                                                 |                                                         Short Description                                                         | 
