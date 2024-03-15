@@ -19,6 +19,7 @@ Service stock trader will subscribe to a specific topics in NATS (topics publish
 
 **Service endpoints**
 
-| EndPoint Syntax        | Example           | Detail  |
-| ------------- |:-------------:| -----:|
-| /api/stock_trader/status      | http://localhost:5112/api/stock_trader/status | Get the health status of this application |
+| EndPoint Syntax           |                    Example                    |                                    Detail |
+|---------------------------|:---------------------------------------------:|------------------------------------------:|
+| /api/stock_trader/status  | http://localhost:8085/api/stock_trader/status | Get the health status of this application |
+| /api/stock_trader/actions | http://localhost:8085/api/stock_trader/status |  Get the most recent record from postgres |
