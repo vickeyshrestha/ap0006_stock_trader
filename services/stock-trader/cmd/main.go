@@ -50,6 +50,9 @@ func main() {
 		index++
 	}
 
+	startGrpcServer(repository, configuration)
+	startHttpAgent(configuration)
+
 	var wg sync.WaitGroup
 	wg.Add(2)
 	go func() {
@@ -65,8 +68,7 @@ func main() {
 
 	// TODO: Third Go routine that would calculate the Mean and inserts into the table
 	wg.Wait()
-	startGrpcServer(repository, configuration)
-	startHttpAgent(configuration)
+
 	runtime.Goexit()
 
 }
