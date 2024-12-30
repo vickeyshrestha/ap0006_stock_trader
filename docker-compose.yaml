@@ -7,7 +7,7 @@ services:
     networks:
       - stockzilla
     restart: always
-    image: nats:2.10.24
+    image: docker.io/vickeyshrestha/nats:2.10.24
     ports:
       - 5101:4222
       - 5102:6222
@@ -19,7 +19,7 @@ services:
     networks:
       - stockzilla
     restart: always
-    image: suisrc/nats-webui:0.0.2
+    image: docker.io/vickeyshrestha/nats-webui:0.0.2
     ports:
       - 8091:80
     depends_on:
