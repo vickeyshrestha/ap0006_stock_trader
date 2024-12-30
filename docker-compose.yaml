@@ -7,11 +7,26 @@ services:
     networks:
       - stockzilla
     restart: always
-    image: docker.io/vickeyshrestha/nats:1.0.0
+    image: nats:2.10.24
     ports:
       - 5101:4222
       - 5102:6222
       - 5103:8222
+    command: [ "--jetstream", "--http_port=8222"]
+
+  nats-webui:
+    container_name: nats-webui
+    networks:
+      - stockzilla
+    restart: always
+    image: suisrc/nats-webui:0.0.2
+    ports:
+      - 8091:80
+    depends_on:
+      - stockzilla-core-messagebus
+    entrypoint: [ "./nats-webui" ]
+    command: [ "--server=nats://stockzilla-core-messagebus:4222" ] # Not working, had to do manually
+
 
   stockzilla-core-postgres:
     container_name: stockzilla-core-postgres

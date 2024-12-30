@@ -29,10 +29,20 @@ The following dependencies should be taken care when docker-compose.yaml will ru
 - docker-compose.yaml can be used on the server to bring up all the required containers 
 - setup docker-compose command on your linux VM using **sudo apt  install docker-compose**
 - run docker-compose.yaml on one of the available servers to bring all the image's instances up and running
-<br> c:/> docker-compose -f docker-compose.yaml up -d (To bring up all docker instances)
-<br> c:/> docker-compose -f docker-compose.yaml down (To bring down all docker instances)
+<br> `c:/> docker-compose -f docker-compose.yaml up -d` (To bring up all docker instances)
+<br> `c:/> docker-compose -f docker-compose.yaml down` (To bring down all docker instances)
   
 ![img.png](img.png)
+
+You can either inspect the logs using regular docker logs <container_id> command, or use the included NATS-WebUI to monitor the nats server:
+1. Go to http://localhost:8091/
+2. Click Add Server button on top right
+3. Set:
+ <br>   `Hostname: stockzilla-core-messagebus`
+ <br>   `Message Port: 4222`
+ <br>   `Monitoring Port: 8222`
+ <br> The UI tool interacts with a NATS server by connecting to its client port (default: 4222) to retrieve and display information about the NATS server and its JetStream features.
+ <br> ![img2.png](img2.png)
 
 **please refer to each service's readme for further detail**
 
