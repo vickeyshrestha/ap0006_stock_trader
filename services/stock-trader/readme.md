@@ -11,10 +11,7 @@ Service stock trader will subscribe to a specific topics in NATS (topics publish
 <br>database named "stockzilla" should be taken care by docker-compose
 
 **building and pushing docker image**
-<br> Run the builddocker.bat file by passing the version as an argument. For eg:
-<br> C:\stockzilla\simulators\stock> builddocker.bat 0.0.1
-<br> Test by running docker run first before pushing into dockerhub
-<br> Use **docker push image:ver** to push into dockerhub
+<br> `make push VERSION=1.0.0`
 
 
 **Service endpoints**

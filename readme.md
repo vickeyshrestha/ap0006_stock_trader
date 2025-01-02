@@ -17,13 +17,23 @@ Please refer to each service's readme for further detail**
 | Simulators/stock (Not really a Service, but a simulator) | publishes random numbers for companies listed under stock exchange into messagebus (NATS) to be consumed by other client services [More On ReadMe](https://github.com/vickeyshrestha/stockzilla/blob/master/simulators/stock/readme.md) |
 
 <h3>prerequisite software</h3>
-Docker should be installed to run the containers
+1. Docker should be installed to run the containers
 
-The following dependencies should be taken care when docker-compose.yaml will run
-1. Nats (we can use a sample server as defined in docker-compose.yaml)
-2. Mongodb - to store some KV pairs
-3. Postgres db (for storing our big data)
-4. Hasura (GraphQL server that gives instant, realtime GraphQL APIs over Postgres)
+The following dependencies should be taken care when docker-compose.yaml will run. Basically all services withing this microservice infrastructure depends on the following tools.
+* Nats (we can use a sample server as defined in docker-compose.yaml)
+* Mongodb - to store some KV pairs
+* Postgres db (for storing our big data)
+* Hasura (GraphQL server that gives instant, realtime GraphQL APIs over Postgres)
+
+2. Goose for DB migrations - 
+<br>`go install github.com/pressly/goose/v3/cmd/goose@latest`
+
+
+3. Some tools to make things easy, espcially for Windows OS:
+* Chocolatey, a package manager for Windows only 
+<br> `Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))`
+* Make command (Windows) - 
+<br>`choco install make`
 
 <h3>docker compose</h3>
 - docker-compose.yaml can be used on the server to bring up all the required containers 
