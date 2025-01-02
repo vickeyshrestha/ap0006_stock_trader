@@ -54,7 +54,7 @@ services:
     networks:
       - stockzilla
     restart: always
-    image: docker.io/vickeyshrestha/simulator-stock:0.0.5
+    image: docker.io/vickeyshrestha/simulator-stock:0.0.6
     ports:
       - 5111:8085
     depends_on:

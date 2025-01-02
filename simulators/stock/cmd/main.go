@@ -40,29 +40,29 @@ func main() {
 
 	i := 0
 	for {
-		mNasdaq["AAPL"] = rand.Float64()
+		mNasdaq["SHEL"] = rand.Float64()
 		mNasdaq["ADP"] = rand.Float64()
-		mNasdaq["AMAT"] = rand.Float64()
-		mNasdaq["AMZN"] = rand.Float64()
+		mNasdaq["IBM"] = rand.Float64()
+		mNasdaq["ULVR"] = rand.Float64()
 		mNasdaq["AXON"] = rand.Float64()
 		sNasdaq := stocks.Stock{
 			Companies: mNasdaq,
 		}
 
-		mNYSE["BABA"] = rand.Float64()
-		mNYSE["BAC"] = rand.Float64()
-		mNYSE["BB"] = rand.Float64()
-		mNYSE["BBAI"] = rand.Float64()
-		mNYSE["BBD"] = rand.Float64()
+		mNYSE["SHEL"] = rand.Float64()
+		mNYSE["ADP"] = rand.Float64()
+		mNYSE["IBM"] = rand.Float64()
+		mNYSE["ULVR"] = rand.Float64()
+		mNYSE["AXON"] = rand.Float64()
 		sNYSE := stocks.Stock{
 			Companies: mNYSE,
 		}
 
-		mLondonSE["CCL"] = rand.Float64()
-		mLondonSE["CCR"] = rand.Float64()
-		mLondonSE["CGT"] = rand.Float64()
-		mLondonSE["CHG"] = rand.Float64()
-		mLondonSE["CHRY"] = rand.Float64()
+		mLondonSE["SHEL"] = rand.Float64()
+		mLondonSE["ADP"] = rand.Float64()
+		mLondonSE["IBM"] = rand.Float64()
+		mLondonSE["ULVR"] = rand.Float64()
+		mLondonSE["AXON"] = rand.Float64()
 		sLondonSE := stocks.Stock{
 			Companies: mLondonSE,
 		}
