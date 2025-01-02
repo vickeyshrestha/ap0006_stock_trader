@@ -1,9 +1,5 @@
 <h1>Stockzilla</h1>
 
-<h2> Overall Architecture</h2>
-
-![architecture](services/stock-trader/readme-resources/architecture.jpg)
-
 Stockzilla is a **microservice** platform that structures an application as a collection of services that are highly maintainable, loosely coupled, independently deployable, and organized around business capabilities.
 
 
