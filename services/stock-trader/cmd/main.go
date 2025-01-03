@@ -28,8 +28,8 @@ func main() {
 	databasePassword := os.Getenv("dbPassword")
 	databaseName := os.Getenv("dbName")
 	natsUrl := os.Getenv("natsUrl")
-	configFileFullPath := "config.json"
-	//configFileFullPath := "I:\\go\\src\\stockzilla\\services\\stock-trader\\resources\\config.json" // while using windows for dev purpose only
+	//configFileFullPath := "config.json" C:\Users\logon\GolandProjects\stockzilla\services\stock-trader\resources\config.json
+	configFileFullPath := "C:\\Users\\logon\\GolandProjects\\stockzilla\\services\\stock-trader\\resources\\config.json" // while using windows for dev purpose only
 	configuration, err := readConfigJson(configFileFullPath)
 	if err != nil {
 		fmt.Println(err)

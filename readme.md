@@ -17,7 +17,7 @@ Please refer to each service's readme for further detail**
 | Simulators/stock (Not really a Service, but a simulator) | publishes random numbers for companies listed under stock exchange into messagebus (NATS) to be consumed by other client services [More On ReadMe](https://github.com/vickeyshrestha/stockzilla/blob/master/simulators/stock/readme.md) |
 
 <h3>prerequisite software</h3>
-1. Docker should be installed to run the containers
+1. Docker is all you need if you want to just run and test.
 
 The following dependencies should be taken care when docker-compose.yaml will run. Basically all services withing this microservice infrastructure depends on the following tools.
 * Nats (we can use a sample server as defined in docker-compose.yaml)
@@ -25,6 +25,7 @@ The following dependencies should be taken care when docker-compose.yaml will ru
 * Postgres db (for storing our big data)
 * Hasura (GraphQL server that gives instant, realtime GraphQL APIs over Postgres)
 
+Now for dev purpose, you might need:
 2. Goose for DB migrations - 
 <br>`go install github.com/pressly/goose/v3/cmd/goose@latest`
 
@@ -41,10 +42,11 @@ The following dependencies should be taken care when docker-compose.yaml will ru
 - run docker-compose.yaml on one of the available servers to bring all the image's instances up and running
 <br> `c:/> docker-compose -f docker-compose.yaml up -d` (To bring up all docker instances)
 <br> `c:/> docker-compose -f docker-compose.yaml down` (To bring down all docker instances)
+- For easiness, a Makefile is also included
   
 ![img.png](img.png)
 
-You can either inspect the logs using regular docker logs <container_id> command, or use the included NATS-WebUI to monitor the nats server:
+You can inspect the logs using regular docker logs <container_id> command, or for advanced users, use the included NATS-WebUI to monitor the nats server:
 1. Go to http://localhost:8091/
 2. Click Add Server button on top right
 3. Set:
