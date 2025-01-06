@@ -43,10 +43,18 @@ Now for dev purpose, you might need:
 <br> `c:/> docker-compose -f docker-compose.yaml up -d` (To bring up all docker instances)
 <br> `c:/> docker-compose -f docker-compose.yaml down` (To bring down all docker instances)
 - For easiness, a Makefile is also included
+
+<h3>Jenkins Pipeline</h3>
+- comes as a container
+- go to set localhost port `localhost:8082`
+- for password - `docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword`
   
 ![img.png](img.png)
 
-You can inspect the logs using regular docker logs <container_id> command, or for advanced users, use the included NATS-WebUI to monitor the nats server:
+You can inspect the logs using regular docker logs <container_id> command
+
+<h3>For stock trader, and stock-simulator</h3>
+- use the included NATS-WebUI to monitor the nats server:
 1. Go to http://localhost:8091/
 2. Click Add Server button on top right
 3. Set:

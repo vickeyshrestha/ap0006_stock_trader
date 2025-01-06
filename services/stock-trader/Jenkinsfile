@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+    environment {
+        GOOS = 'linux'
+        IMAGE_NAME = 'vickeyshrestha/service-stock-trader'
+        VERSION = 'latest' // Default version
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+                script {
+                    if (env.BRANCH_NAME != 'master') {
+                        error('Build and push process is only allowed on the master branch.')
+                    }
+                }
+            }
+        }
+
+        stage('Build Go Binary') {
+            steps {
+                sh '''
+                    go clean
+                    GOOS=${GOOS} go build -a -installsuffix cgo -o service-stocktrader cmd/main.go
+                '''
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh "docker build -t ${IMAGE_NAME}:${VERSION} ."
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                withDockerRegistry([credentialsId: '9fc856c7-e7ce-47b2-89f4-db8ecd4ad564', url: 'https://hub.docker.com/']) {
+                    sh "docker push ${IMAGE_NAME}:${VERSION}"
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Docker image ${IMAGE_NAME}:${VERSION} built and pushed successfully."
+        }
+        failure {
+            echo "Build or push process failed."
+        }
+    }
+}

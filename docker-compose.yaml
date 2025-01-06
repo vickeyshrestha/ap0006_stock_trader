@@ -141,14 +141,54 @@ services:
       retries: 5
       start_period: 5s
 
+  # New Docker-in-Docker Service
+  jenkins-docker:
+    image: docker:dind
+    container_name: jenkins-docker
+    privileged: true
+    networks:
+      - jenkins
+    environment:
+      DOCKER_TLS_CERTDIR: /certs
+    volumes:
+      - jenkins-docker-certs:/certs/client
+      - jenkins-data:/var/jenkins_home
+    ports:
+      - 2376:2376
+
+  # New Jenkins Service
+  jenkins-blueocean:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: docker.io/vickeyshrestha/jenkins:2.479.2-1
+    container_name: jenkins-blueocean
+    restart: on-failure
+    networks:
+      - jenkins
+    environment:
+      DOCKER_HOST: tcp://docker:2376
+      DOCKER_CERT_PATH: /certs/client
+      DOCKER_TLS_VERIFY: 1
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - jenkins-docker-certs:/certs/client:ro
+    ports:
+      - 8082:8080
+      - 50000:50000
+
 # Add any volumes here if required
 volumes:
   stockzilla-sql:
+  jenkins-docker-certs:
+  jenkins-data:
 
 networks:
   stockzilla:
     driver: "bridge"
-      #ipam:
-      # driver: default
-    #config:
+  jenkins:
+    driver: bridge
+  #ipam:
+    # driver: default
+  #config:
     # - subnet: 10.75.0.0/23
