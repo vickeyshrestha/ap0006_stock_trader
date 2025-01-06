@@ -11,6 +11,7 @@ Service stock trader will subscribe to a specific topics in NATS (topics publish
 <br>database named "stockzilla" should be taken care by docker-compose
 
 **building and pushing docker image**
+Jenkins should do it, but to do it manually, do this:
 <br> `make push VERSION=1.0.0`
 
 
